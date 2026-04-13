@@ -27,13 +27,22 @@ claude plugin add github:EloiseMeh/exit-checklist
 
 ## Usage
 
-At the end of your session, run:
+At the end of your session, either run the command:
 
 ```
 /exit-checklist
 ```
 
-Or just tell Claude you're wrapping up — it will recognize exit intent and offer to run the checklist.
+Or just use natural language — any of these will trigger the checklist automatically:
+
+- "I'm about to exit"
+- "exiting"
+- "wrapping up"
+- "I'm done"
+- "closing up"
+- "signing off"
+- "good to exit?"
+- "can I exit?"
 
 ## Supported platforms
 
