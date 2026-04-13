@@ -1,23 +1,26 @@
-# Exit Checklist
+# Exit Checklist for Claude Code
 
-A [Claude Code](https://claude.com/claude-code) plugin that runs a full session exit workflow with a single command. No more forgotten commits, broken deploys, or lost context.
+**One command to wrap up your entire session.** Commit, push, build, deploy, update docs — done.
 
-## Who is this for?
+No more "did I push that?", no more orphaned dev servers, no more undocumented changes.
 
-Any developer using Claude Code who works across sessions and wants a clean handoff every time. Whether you're building a frontend app, a backend API, or a multi-repo project — this plugin makes sure nothing gets left behind when you wrap up.
+```
+> I'm done for today
 
-## What it does
+Exit Checklist Complete
+=======================
+Repos found:     3
+Dev servers:     killed 1 (port 5173)
+Committed:       home, snake, pretzel
+Pushed:          home, snake, pretzel
+Built:           pretzel
+Deployed:        Netlify: 3 sites, Cloudflare: 3 sites
+Docs updated:    UPDATES.md
 
-When you run `/exit-checklist`, it walks through a complete shutdown sequence:
+Clean exit — all work saved and deployed.
+```
 
-1. **Finds all git repos** in your working directory
-2. **Kills running dev servers** on common ports (3000, 5173, 8080, etc.)
-3. **Checks repo status** — uncommitted changes, unpushed commits, branch state
-4. **Commits and pushes** dirty repos with a session summary
-5. **Builds** projects that have a build step
-6. **Deploys** to your hosting platform (auto-detects Netlify, Cloudflare, or Vercel)
-7. **Updates docs** — appends a session summary and remaining TODOs to your changelog
-8. **Reports** final status so you know exactly what shipped
+---
 
 ## Install
 
@@ -25,45 +28,61 @@ When you run `/exit-checklist`, it walks through a complete shutdown sequence:
 claude plugin add github:EloiseMeh/exit-checklist
 ```
 
-## Usage
+## How to use
 
-At the end of your session, either run the command:
+Run the slash command:
 
 ```
 /exit-checklist
 ```
 
-Or just use natural language — any of these will trigger the checklist automatically:
+Or just talk naturally — the plugin auto-triggers on phrases like:
 
-- "I'm about to exit"
-- "exiting"
-- "wrapping up"
-- "I'm done"
-- "closing up"
-- "signing off"
-- "good to exit?"
-- "can I exit?"
+> "I'm about to exit" / "wrapping up" / "I'm done" / "signing off" / "exiting"
+
+No special syntax needed. Just say you're done and it handles the rest.
+
+---
+
+## What it does
+
+| Step | What happens |
+|------|-------------|
+| **Find repos** | Scans your working directory for all git repos |
+| **Kill dev servers** | Finds and stops processes on ports 3000, 4321, 5173, 8080, 8000, 8888 |
+| **Check status** | Uncommitted changes, unpushed commits, branch state |
+| **Commit & push** | Stages, commits with a session summary, pushes to remote |
+| **Build** | Runs `npm run build` if a build script exists |
+| **Deploy** | Auto-detects your platform and ships it |
+| **Update docs** | Appends session summary + TODOs to your changelog |
+| **Report** | Prints exactly what shipped and what's left |
+
+Steps that don't apply get skipped — the checklist works for any project, whether it's a full-stack app with CI/CD or a simple folder with docs.
 
 ## Supported platforms
 
-The plugin auto-detects your hosting platform:
+Auto-detected from your project files:
 
-| Platform | How it's detected | What happens |
-|----------|------------------|--------------|
-| **Netlify** | `.netlify/` or `netlify.toml` | Runs `netlify deploy --prod` |
-| **Cloudflare** | `wrangler.jsonc` or `wrangler.toml` | Confirms git push triggered auto-deploy |
-| **Vercel** | `.vercel/` or `vercel.json` | Runs `vercel --prod` |
+| Platform | Detected by | Action |
+|----------|------------|--------|
+| **Netlify** | `.netlify/` or `netlify.toml` | `netlify deploy --prod` |
+| **Cloudflare** | `wrangler.jsonc` or `wrangler.toml` | Confirms push triggered auto-deploy |
+| **Vercel** | `.vercel/` or `vercel.json` | `vercel --prod` |
 
-If you use multiple platforms (e.g. Netlify + Cloudflare), it deploys to all of them.
+Multiple platforms? It deploys to all of them.
 
-## Customization
+## Make it yours
 
-The skill is a plain markdown file at `skills/exit-checklist/SKILL.md`. Fork this repo and edit it to fit your workflow:
+The entire skill is one markdown file — `skills/exit-checklist/SKILL.md`. Fork this repo and customize:
 
 - Add or remove steps
-- Change which ports to check for dev servers
+- Change which ports to scan
 - Add project-specific deploy commands
-- Customize the docs format
+- Adjust the docs format
+
+No config files, no dependencies, no build step. Just markdown.
+
+---
 
 ## License
 
