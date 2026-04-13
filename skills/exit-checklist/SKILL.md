@@ -77,7 +77,9 @@ For the deploy directory:
 
 ## Step 7: Update docs
 
-Look for a docs file in this order: `UPDATES.md`, `CHANGELOG.md`. Use whichever exists. If neither exists, skip this step.
+Look for a docs file in this order: `UPDATES.md`, `CHANGELOG.md`, `CHANGES.md`. Use the first one found.
+
+If none exists, ask the user: "No changelog found. Want me to create an UPDATES.md to track session changes?" If they say yes, create it. If no, skip this step.
 
 Append a session summary section with:
 - Today's date
