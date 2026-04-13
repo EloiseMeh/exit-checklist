@@ -29,12 +29,13 @@ If any are found, list them and ask the user before killing. Kill with `kill <pi
 
 ## Step 3: Check repo status
 
-For each repo, run:
+For each repo, run all checks in a single command to save tokens:
 
-1. `git status --short` — check for uncommitted changes (do not use `-uall`)
-2. `git log @{u}..HEAD --oneline 2>/dev/null` — check for unpushed commits
-3. `git rev-parse --abbrev-ref HEAD` — current branch name
-4. `git fetch --dry-run 2>&1` — check if behind remote
+```bash
+git status --short && git log @{u}..HEAD --oneline 2>/dev/null && git rev-parse --abbrev-ref HEAD && git fetch --dry-run 2>&1
+```
+
+This checks: uncommitted changes, unpushed commits, current branch, and whether it's behind remote — all in one call per repo.
 
 Report findings before proceeding. Flag any repos on a feature branch with unpushed work.
 
@@ -82,6 +83,8 @@ For the deploy directory:
 - For static sites with no build step, use `.` (current directory)
 
 ## Step 7: Update docs
+
+**Skip this step if all repos were clean and nothing was committed.** There's nothing to document.
 
 Look for a docs file in this order: `UPDATES.md`, `CHANGELOG.md`, `CHANGES.md`. Use the first one found.
 
