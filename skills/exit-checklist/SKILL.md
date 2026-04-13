@@ -1,11 +1,11 @@
 ---
 name: exit-checklist
-description: Run a full session exit workflow — commit, push, build, deploy, and update docs. Use when finishing a session, wrapping up work, or before closing the terminal.
+description: Run a full session exit workflow — commit, push, build, deploy, and update docs. Trigger phrases include "about to exit", "exiting", "wrapping up", "I'm done", "closing up", "signing off", "end of session", "good to exit?", "can I exit?", or any variation indicating the user is finishing their session.
 ---
 
 # Exit Checklist
 
-Run this checklist when the user says they're done, about to exit, wrapping up, or asks to run the exit checklist.
+**Auto-trigger:** Run this checklist whenever the user signals they are finishing their session. This includes phrases like "about to exit", "exiting", "I'm done", "wrapping up", "closing up", "signing off", "good to exit?", "can I exit?", or similar. Do not wait for the user to explicitly say `/exit-checklist` — natural language triggers should work the same way.
 
 Execute each step in order. If a step doesn't apply (e.g. no deploy platform detected), skip it and note why in the final report.
 
