@@ -7,15 +7,15 @@ description: Run a full session exit workflow — commit, push, build, deploy, a
 
 **Auto-trigger:** Run this checklist whenever the user signals they are finishing their session. This includes phrases like "about to exit", "exiting", "I'm done", "wrapping up", "closing up", "signing off", "good to exit?", "can I exit?", or similar. Do not wait for the user to explicitly say `/exit-checklist` — natural language triggers should work the same way.
 
-Execute each step in order. If a step doesn't apply (e.g. no deploy platform detected), skip it and note why in the final report.
+Execute each step in order. **If a step doesn't apply, skip it and note why in the final report — do not stop the checklist early.** Not every project uses git, has a build step, or deploys to a platform. The checklist should always run to completion.
 
 ---
 
 ## Step 1: Find all git repos
 
-Scan the current working directory and its immediate subdirectories for `.git` folders. Collect every repo path — the rest of the checklist runs on each one.
+Scan the current working directory and its immediate subdirectories for `.git` folders. Collect every repo path.
 
-If no git repos are found, tell the user and stop.
+If no git repos are found, note "No git repos found — skipping git and deploy steps" and continue to Step 2. Steps 3-6 will be skipped automatically.
 
 ## Step 2: Kill running dev servers
 
@@ -91,13 +91,13 @@ Print a summary table in the chat:
 ```
 Exit Checklist Complete
 =======================
-Repos found:     <count>
+Repos found:     <count or "none">
 Dev servers:     <killed N / none found>
-Committed:       <list of repos>
-Pushed:          <list of repos>
-Built:           <list of repos>
-Deployed:        <platform: URL for each>
-Docs updated:    <list of files>
+Committed:       <list of repos or "skipped — no repos">
+Pushed:          <list of repos or "skipped — no repos">
+Built:           <list of repos or "skipped — no build step">
+Deployed:        <platform: URL for each, or "skipped — no platform detected">
+Docs updated:    <list of files or "skipped — no changelog found">
 
 Remaining TODOs:
 - <any unfinished work or issues encountered>
