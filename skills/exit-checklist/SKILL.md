@@ -38,6 +38,8 @@ For each repo, run:
 
 Report findings before proceeding. Flag any repos on a feature branch with unpushed work.
 
+**If a repo has no uncommitted changes AND no unpushed commits, mark it as "clean" and skip Steps 4-6 for that repo.** Don't waste time building and deploying code that hasn't changed.
+
 ## Step 4: Commit and push
 
 For each repo with uncommitted changes:
@@ -51,7 +53,9 @@ If the repo has no remote, skip pushing and note it in the report.
 
 ## Step 5: Build
 
-For each repo that has a `package.json` with a `build` script:
+**Only for repos that had changes committed in Step 4.**
+
+For each changed repo that has a `package.json` with a `build` script:
 
 ```bash
 npm run build
@@ -60,6 +64,8 @@ npm run build
 If the build fails, stop and report the error. Do not deploy broken builds.
 
 ## Step 6: Deploy
+
+**Only for repos that had changes committed in Step 4.**
 
 Auto-detect the hosting platform and deploy:
 
