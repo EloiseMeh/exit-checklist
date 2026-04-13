@@ -61,6 +61,17 @@ Steps that don't apply get skipped — the checklist works for any project, whet
 
 No changelog file? It'll ask if you want one created. Say yes once and every future session gets documented automatically.
 
+## Token efficiency
+
+The skill is designed to use as few tokens as possible:
+
+- **Batched git checks** — runs all repo checks (status, unpushed commits, branch, remote) in a single command instead of four separate calls
+- **Skips clean repos** — if a repo has no changes, build and deploy are skipped entirely
+- **Skips empty doc updates** — if nothing was committed, it won't write "nothing happened" to your changelog
+- **No unnecessary output** — only reports once at the end, not after every step
+
+A session where all repos are clean finishes in a few seconds with minimal token usage.
+
 ## Supported platforms
 
 Auto-detected from your project files:
