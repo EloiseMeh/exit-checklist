@@ -1,0 +1,8 @@
+{
+  "name": "exit-checklist",
+  "description": "Session exit workflow: commit, push, build, deploy, update docs",
+  "version": "1.0.0",
+  "author": { "name": "EloiseMeh" },
+  "repository": "https://github.com/EloiseMeh/exit-checklist",
+  "license": "MIT"
+}
