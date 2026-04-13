@@ -54,10 +54,12 @@ No special syntax needed. Just say you're done and it handles the rest.
 | **Commit & push** | Stages, commits with a session summary, pushes to remote |
 | **Build** | Runs `npm run build` if a build script exists |
 | **Deploy** | Auto-detects your platform and ships it |
-| **Update docs** | Appends session summary + TODOs to your changelog |
+| **Update docs** | Appends session summary + TODOs to your changelog (or offers to create one) |
 | **Report** | Prints exactly what shipped and what's left |
 
 Steps that don't apply get skipped — the checklist works for any project, whether it's a full-stack app with CI/CD or a simple folder with docs.
+
+No changelog file? It'll ask if you want one created. Say yes once and every future session gets documented automatically.
 
 ## Supported platforms
 
