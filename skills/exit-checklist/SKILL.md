@@ -41,6 +41,8 @@ Report findings before proceeding. Flag any repos on a feature branch with unpus
 
 **If a repo has no uncommitted changes AND no unpushed commits, mark it as "clean" and skip Steps 4-6 for that repo.** Don't waste time building and deploying code that hasn't changed.
 
+**Classify changes as "code" or "docs-only".** If the only changed files are documentation (`.md`, `usability-test/`, `docs/`, `README`, `CHANGELOG`, `UPDATES`, `LICENSE`), mark the repo as "docs-only". Docs-only repos should be committed and pushed in Step 4, but skip Steps 5-6 (build and deploy) — docs don't affect the live app.
+
 ## Step 4: Commit and push
 
 For each repo with uncommitted changes:
@@ -54,7 +56,7 @@ If the repo has no remote, skip pushing and note it in the report.
 
 ## Step 5: Build
 
-**Only for repos that had changes committed in Step 4.**
+**Only for repos that had code changes committed in Step 4. Skip docs-only repos.**
 
 For each changed repo that has a `package.json` with a `build` script:
 
@@ -66,7 +68,7 @@ If the build fails, stop and report the error. Do not deploy broken builds.
 
 ## Step 6: Deploy
 
-**Only for repos that had changes committed in Step 4.**
+**Only for repos that had code changes committed in Step 4. Skip docs-only repos.**
 
 Auto-detect the hosting platform and deploy:
 
@@ -104,10 +106,10 @@ Exit Checklist Complete
 =======================
 Repos found:     <count or "none">
 Dev servers:     <killed N / none found>
-Committed:       <list of repos or "skipped — no repos">
+Committed:       <list of repos or "skipped — no repos"> (note docs-only repos separately)
 Pushed:          <list of repos or "skipped — no repos">
-Built:           <list of repos or "skipped — no build step">
-Deployed:        <platform: URL for each, or "skipped — no platform detected">
+Built:           <list of repos or "skipped — no code changes">
+Deployed:        <platform: URL for each, or "skipped — no code changes">
 Docs updated:    <list of files or "skipped — no changelog found">
 
 Remaining TODOs:
