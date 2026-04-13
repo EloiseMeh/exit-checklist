@@ -67,6 +67,7 @@ The skill is designed to use as few tokens as possible:
 
 - **Batched git checks** — runs all repo checks (status, unpushed commits, branch, remote) in a single command instead of four separate calls
 - **Skips clean repos** — if a repo has no changes, build and deploy are skipped entirely
+- **Skips docs-only repos** — if only markdown/docs changed, it commits and pushes but skips build and deploy
 - **Skips empty doc updates** — if nothing was committed, it won't write "nothing happened" to your changelog
 - **No unnecessary output** — only reports once at the end, not after every step
 
