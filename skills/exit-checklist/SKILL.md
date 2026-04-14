@@ -11,6 +11,20 @@ Execute each step in order. **If a step doesn't apply, skip it and note why in t
 
 ---
 
+## Step 0: Preflight check
+
+Before running the checklist, verify tools are available. Run a single command:
+
+```bash
+which git && which netlify; which vercel; which wrangler
+```
+
+If a tool is missing, don't error out — just note it and skip steps that need it:
+- **No git:** "Git not installed — skipping save steps. Learn more: https://git-scm.com/book/en/v2/Getting-Started-Installing-Git"
+- **No netlify/vercel/wrangler CLI:** Skip deploy for that platform silently. It's fine — the user may deploy another way.
+
+If git is missing, skip directly to Step 2 and then Step 7-8.
+
 ## Step 1: Find all git repos
 
 Scan the current working directory and its immediate subdirectories for `.git` folders. Collect every repo path.
@@ -47,12 +61,13 @@ Report findings before proceeding. Flag any repos on a feature branch with unpus
 
 For each repo with uncommitted changes:
 
-1. Stage relevant files (prefer naming specific files over `git add -A`)
-2. Do NOT stage files that look like secrets (`.env`, credentials, tokens)
-3. Write a concise commit message summarizing the session's changes
-4. Push to the remote tracking branch
+1. Check `git config user.name` — if not set, warn: "Git user not configured. Run `git config --global user.name 'Your Name'` and `git config --global user.email 'you@example.com'` to fix." Then skip committing for that repo.
+2. Stage relevant files (prefer naming specific files over `git add -A`)
+3. Do NOT stage files that look like secrets (`.env`, credentials, tokens)
+4. Write a concise commit message summarizing the session's changes
+5. Push to the remote tracking branch
 
-If the repo has no remote, skip pushing and note it in the report.
+If the repo has no remote, skip pushing and note: "No remote configured — changes saved locally only."
 
 ## Step 5: Build
 
